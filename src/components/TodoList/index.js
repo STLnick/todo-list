@@ -24,8 +24,11 @@ export const TodoList = () => {
   }
 
   const handleCompleteTodo = (e, targetId) => {
+    const targetTodo = todos.find(({ id }) => id === targetId)
 
-    setTodos([...todos, newTodo])
+    targetTodo['completed'] = e.target.checked
+
+    setTodos(todos.map(todo => todo.id === targetTodo.id ? targetTodo : todo))
   }
 
   return (
