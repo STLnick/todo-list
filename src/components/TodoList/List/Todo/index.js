@@ -1,9 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import './Todo.css'
+
 export const Todo = ({ completed, handler, id, text }) => {
   return (
-    <li>
+    <li className={completed ? 'completed-todo' : null}>
       {text}
       <label className="screen-reader-text" htmlFor="completed">Completed</label>
       <input
