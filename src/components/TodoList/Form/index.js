@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 export const Form = ({ handler }) => {
 
@@ -9,4 +10,8 @@ export const Form = ({ handler }) => {
       <button type="submit">Add Todo</button>
     </form>
   )
+}
+
+Form.propTypes = {
+  handler: PropTypes.func
 }
