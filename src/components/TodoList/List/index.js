@@ -1,21 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import { Todo } from './Todo'
+
 export const List = ({ currentTodos, handler }) => {
 
   const renderTodos = () => {
     return currentTodos.map(({ completed, id, text }) => {
       return (
-        <li key={id}>
-          {text}
-          <label htmlFor="completed">Completed</label>
-          <input
-            onChange={(e) => handler(e, id)}
-            type="checkbox"
-            id="completed"
-            checked={completed ? true : false}
-          />
-        </li>
+        <Todo completed={completed} handler={handler} id={id} key={id} text={text} />
       )
     })
   }
