@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 export const List = ({ currentTodos }) => {
 
@@ -19,4 +20,8 @@ export const List = ({ currentTodos }) => {
       {renderTodos()}
     </ol>
   )
+}
+
+List.propTypes = {
+  currentTodos: PropTypes.array
 }
