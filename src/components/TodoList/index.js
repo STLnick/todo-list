@@ -34,8 +34,8 @@ export const TodoList = () => {
   return (
     <div>
       <h2>Todo List</h2>
-      <List currentTodos={todos} />
-      <Form handler={submitHandler} />
+      <List currentTodos={todos} handler={handleCompleteTodo} />
+      <Form handler={handleSubmit} />
     </div>
   )
 }
