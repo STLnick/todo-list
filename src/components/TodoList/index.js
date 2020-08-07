@@ -13,9 +13,17 @@ export const TodoList = () => {
     })()
   }, [])
 
+  const handleSubmit = (e) => {
     e.preventDefault()
+    const newTodo = {
+      completed: false,
+      id: Date.now(),
+      text: e.target.querySelector('#new-todo').value
+    }
+    setTodos([...todos, newTodo])
+  }
 
-    const newTodo = e.target.querySelector('#new-todo').value
+  const handleCompleteTodo = (e, targetId) => {
 
     setTodos([...todos, newTodo])
   }
