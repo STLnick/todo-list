@@ -14,7 +14,7 @@ export const List = ({ currentTodos, handler }) => {
   }
 
   return (
-    <ol>
+    <ol className="has-text-centered mb-5">
       {renderTodos()}
     </ol>
   )

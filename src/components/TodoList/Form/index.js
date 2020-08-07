@@ -4,10 +4,13 @@ import PropTypes from 'prop-types'
 export const Form = ({ handler }) => {
 
   return (
-    <form onSubmit={handler}>
-      <label className="screen-reader-text" htmlFor="new-todo">New Todo</label>
-      <input id="new-todo" placeholder="New Todo..." type="text" />
-      <button type="submit">Add Todo</button>
+    <form className="has-text-centered" onSubmit={handler}>
+      <div className="field is-flex">
+        <label className="screen-reader-text" htmlFor="new-todo">New Todo</label>
+        <input className="input is-rounded is-success" id="new-todo" placeholder="New Todo..." type="text" />
+        <p className="help">e.g. Take out the Trash</p>
+        <button className="button is-success is-uppercase has-text-weight-bold" type="submit">Add Todo</button>
+      </div>
     </form>
   )
 }

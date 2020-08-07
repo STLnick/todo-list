@@ -34,8 +34,11 @@ export const TodoList = () => {
   }
 
   return (
-    <div>
-      <h2>Todo List</h2>
+    <div className="box p-4">
+      <h2
+        className="title has-text-centered is-family-monospace is-uppercase has-background-success-dark has-text-white">
+        Todo List
+      </h2>
       <List currentTodos={todos} handler={handleCompleteTodo} />
       <Form handler={handleSubmit} />
     </div>

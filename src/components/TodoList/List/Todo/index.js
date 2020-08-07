@@ -5,15 +5,22 @@ import './Todo.css'
 
 export const Todo = ({ completed, handler, id, text }) => {
   return (
-    <li className={completed ? 'completed-todo' : null}>
-      {text}
-      <label className="screen-reader-text" htmlFor="completed">Completed</label>
-      <input
-        onChange={(e) => handler(e, id)}
-        type="checkbox"
-        id="completed"
-        checked={completed ? true : false}
-      />
+    <li className="columns">
+      <div className="column is-one-fifth"></div>
+      <div className="column">
+        <span className={completed ? 'completed-todo' : null}>{text}</span>
+      </div>
+      <div className="column">
+        <label className="screen-reader-text" htmlFor="completed">Completed</label>
+        <input
+          className="checkbox"
+          onChange={(e) => handler(e, id)}
+          type="checkbox"
+          id="completed"
+          checked={completed ? true : false}
+        />
+      </div>
+      <div className="column is-one-fifth"></div>
     </li>
   )
 }
