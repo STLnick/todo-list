@@ -8,7 +8,7 @@ export const Todo = ({ completed, handler, id, text }) => {
     <li className="columns">
       <div className="column is-one-fifth"></div>
       <div className="column">
-        <span className={completed ? 'completed-todo' : null}>{text}</span>
+        <span className={`has-text-weight-semibold ${completed ? 'completed-todo' : null}`} >{text}</span>
       </div>
       <div className="column">
         <label className="screen-reader-text" htmlFor="completed">Completed</label>

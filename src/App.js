@@ -6,7 +6,7 @@ import './App.css';
 
 export const App = () => {
   return (
-    <div className="level">
+    <div className="level" id="wrapper">
       <TodoList />
     </div>
   );

@@ -1,4 +1,4 @@
-.level {
-  justify-content: center;
+#wrapper {
   height: 100vh;
+  justify-content: center;
 }
