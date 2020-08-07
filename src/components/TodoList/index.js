@@ -21,6 +21,8 @@ export const TodoList = () => {
       text: e.target.querySelector('#new-todo').value
     }
     setTodos([...todos, newTodo])
+
+    e.target.querySelector('#new-todo').value = ''
   }
 
   const handleCompleteTodo = (e, targetId) => {
