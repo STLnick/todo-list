@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import api from 'api'
 
 import { Form } from './Form'
 import { List } from './List'
@@ -6,7 +7,12 @@ import { List } from './List'
 export const TodoList = () => {
   const [todos, setTodos] = useState([])
 
-  const submitHandler = (e) => {
+  useEffect(() => {
+    (async () => {
+      setTodos(await api.index())
+    })()
+  }, [])
+
     e.preventDefault()
 
     const newTodo = e.target.querySelector('#new-todo').value
