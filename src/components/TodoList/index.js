@@ -17,7 +17,7 @@ export const TodoList = () => {
   return (
     <div>
       <h2>Todo List</h2>
-      <List />
+      <List currentTodos={todos} />
       <Form handler={submitHandler} />
     </div>
   )
