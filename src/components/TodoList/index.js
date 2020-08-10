@@ -13,6 +13,13 @@ export const TodoList = () => {
     })()
   }, [])
 
+  const calcCompletedTodos = (numTodos = todos.length) => {
+    // divide # of trues by # of todos
+    const numComplete = todos.filter(todo => todo.completed === true).length
+
+    document.querySelector('.completed-todos').textContent = `${numComplete} / ${numTodos}`
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault()
     const newTodo = {
@@ -23,6 +30,8 @@ export const TodoList = () => {
     setTodos([...todos, newTodo])
 
     e.target.querySelector('#new-todo').value = ''
+
+    calcCompletedTodos(todos.length + 1)
   }
 
   const handleCompleteTodo = ({ target: { checked } }, targetId) => {
@@ -31,14 +40,25 @@ export const TodoList = () => {
     targetTodo.completed = checked
 
     setTodos(prevState => prevState.map(todo => todo.id === targetTodo.id ? targetTodo : todo))
+
+    calcCompletedTodos()
   }
 
   return (
     <div className="box p-4">
       <h2
-        className="title has-text-centered is-family-monospace is-uppercase has-background-success-dark has-text-white">
+        className="title py-3 has-text-centered is-family-monospace is-uppercase has-background-success-dark has-text-white">
         Todo List
       </h2>
+      <div>
+        <p className="has-text-centered mb-4 py-2 has-text-weight-bold has-background-success has-text-white">
+          Completed
+          <span className="completed-todos">
+            {` ${todos.filter(todo => todo.completed === true).length} / ${todos.length} `}
+          </span>
+          Todos
+        </p>
+      </div>
       <List currentTodos={todos} handler={handleCompleteTodo} />
       <Form handler={handleSubmit} />
     </div>
