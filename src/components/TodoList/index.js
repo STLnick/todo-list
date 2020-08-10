@@ -39,6 +39,14 @@ export const TodoList = () => {
     setTodos(prevState => prevState.map(todo => todo.id === targetTodo.id ? targetTodo : todo))
   }
 
+  const handleDeleteTodo = (e) => {
+    // identify which todo was clicked to delete
+    const targetId = Number(e.target.closest('span').dataset.id)
+
+    // setTodos with array EXCLUDING the targeted todo
+    setTodos(() => todos.filter(({ id }) => id !== targetId))
+  }
+
   return (
     <div className="box p-4">
       <h2
@@ -46,7 +54,11 @@ export const TodoList = () => {
         Todo List
       </h2>
       <Display numComplete={calcCompletedTodos()} numTodos={todos.length} />
-      <List currentTodos={todos} handler={handleCompleteTodo} />
+      <List
+        currentTodos={todos}
+        completeHandler={handleCompleteTodo}
+        deleteHandler={handleDeleteTodo}
+      />
       <Form handler={handleSubmit} />
     </div>
   )
