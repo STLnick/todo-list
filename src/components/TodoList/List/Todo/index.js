@@ -8,22 +8,26 @@ import './Todo.css'
 export const Todo = ({ completed, handler, id, text }) => {
   return (
     <li className="columns">
-      <div className="column is-one-fifth"></div>
-      <div className="column">
+      {/* <div className="column is-one-fifth"></div> */}
+      <div className="column is-two-thirds">
         <span className={`has-text-weight-semibold ${completed ? 'completed-todo' : null}`} >{text}</span>
       </div>
-      <div className="column">
-        <label className="screen-reader-text" htmlFor="completed">Completed</label>
-        <input
-          className="checkbox"
-          onChange={(e) => handler(e, id)}
-          type="checkbox"
-          id="completed"
-          checked={completed ? true : false}
-        />
-      </div>
-      <div className="column is-one-fifth"></div>
+      <div className="columns column">
+        <div className="column">
+          <label className="screen-reader-text" htmlFor="completed">Completed</label>
+          <input
+            className="checkbox"
+            onChange={(e) => handler(e, id)}
+            type="checkbox"
+            id="completed"
+            checked={completed ? true : false}
+          />
+        </div>
+        <div className="column has-text-danger">
           <FontAwesomeIcon icon={faTrashAlt} />
+        </div>
+      </div>
+
     </li>
   )
 }
