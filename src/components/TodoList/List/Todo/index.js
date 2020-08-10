@@ -8,8 +8,7 @@ import './Todo.css'
 export const Todo = ({ completed, handler, id, text }) => {
   return (
     <li className="columns">
-      {/* <div className="column is-one-fifth"></div> */}
-      <div className="column is-two-thirds">
+      <div className="column is-four-fifths">
         <span className={`has-text-weight-semibold ${completed ? 'completed-todo' : null}`} >{text}</span>
       </div>
       <div className="columns column">
