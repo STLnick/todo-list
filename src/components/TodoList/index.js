@@ -14,7 +14,7 @@ export const TodoList = () => {
     })()
   }, [])
 
-  const calcCompletedTodos = () => todos.filter(todo => todo.completed === true).length
+  const calcCompletedTodos = () => todos.filter(({ completed }) => completed).length
 
   const handleSubmit = (e) => {
     e.preventDefault()
