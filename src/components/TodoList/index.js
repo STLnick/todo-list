@@ -40,10 +40,8 @@ export const TodoList = () => {
   }
 
   const handleDeleteTodo = (e) => {
-    // identify which todo was clicked to delete
     const targetId = Number(e.target.closest('span').dataset.id)
 
-    // setTodos with array EXCLUDING the targeted todo
     setTodos(() => todos.filter(({ id }) => id !== targetId))
   }
 
