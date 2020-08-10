@@ -6,11 +6,10 @@ export const Display = ({ numComplete, numTodos }) => {
   return (
     <div>
       <p className="has-text-centered mb-4 py-2 has-text-weight-bold has-background-success has-text-white">
-        Completed
         <span className="completed-todos">
-          {` ${numComplete} / ${numTodos} `}
+          {`${numComplete} / ${numTodos} `}
         </span>
-        Todos
+        Completed
       </p>
     </div>
   )
