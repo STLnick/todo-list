@@ -5,7 +5,7 @@ import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 
 import './Todo.css'
 
-export const Todo = ({ completed, handler, id, text }) => {
+export const Todo = ({ completed, completeHandler, deleteHandler, id, text }) => {
   return (
     <li className="columns">
       <div className="column is-four-fifths">
@@ -16,14 +16,16 @@ export const Todo = ({ completed, handler, id, text }) => {
           <label className="screen-reader-text" htmlFor="completed">Completed</label>
           <input
             className="checkbox"
-            onChange={(e) => handler(e, id)}
+            onChange={(e) => completeHandler(e, id)}
             type="checkbox"
             id="completed"
             checked={completed ? true : false}
           />
         </div>
         <div className="column has-text-danger">
-          <FontAwesomeIcon icon={faTrashAlt} />
+          <span data-id={id} onClick={deleteHandler} onKeyUp={deleteHandler}>
+            <FontAwesomeIcon icon={faTrashAlt} />
+          </span>
         </div>
       </div>
 
@@ -33,7 +35,8 @@ export const Todo = ({ completed, handler, id, text }) => {
 
 Todo.propTypes = {
   completed: PropTypes.bool,
-  handler: PropTypes.func,
+  completeHandler: PropTypes.func,
+  deleteHandler: PropTypes.func,
   id: PropTypes.number,
   text: PropTypes.string
 }

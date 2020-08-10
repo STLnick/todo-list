@@ -3,12 +3,19 @@ import PropTypes from 'prop-types'
 
 import { Todo } from './Todo'
 
-export const List = ({ currentTodos, handler }) => {
+export const List = ({ currentTodos, completeHandler, deleteHandler }) => {
 
   const renderTodos = () => {
     return currentTodos.map(({ completed, id, text }) => {
       return (
-        <Todo completed={completed} handler={handler} id={id} key={id} text={text} />
+        <Todo
+          completed={completed}
+          completeHandler={completeHandler}
+          deleteHandler={deleteHandler}
+          id={id}
+          key={id}
+          text={text}
+        />
       )
     })
   }
