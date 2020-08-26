@@ -29,9 +29,9 @@ const reducer = (state, action) => {
 }
 
 export const TodoList = () => {
-  const [state, dispatch] = useReducer(reducer, initialState)
+  const [todos, dispatch] = useReducer(reducer, initialState)
 
-  const calcCompletedTodos = () => state.filter(({ completed }) => completed).length
+  const calcCompletedTodos = () => todos.filter(({ completed }) => completed).length
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -57,9 +57,9 @@ export const TodoList = () => {
         className="title py-3 has-text-centered is-family-monospace is-uppercase has-background-success-dark has-text-white">
         Todo List
       </h2>
-      <Display numComplete={calcCompletedTodos()} numTodos={state.length} />
+      <Display numComplete={calcCompletedTodos()} numTodos={todos.length} />
       <List
-        currentTodos={state}
+        currentTodos={todos}
         completeHandler={handleCompleteTodo}
         deleteHandler={handleDeleteTodo}
       />
