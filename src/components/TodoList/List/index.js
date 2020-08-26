@@ -28,6 +28,7 @@ export const List = ({ currentTodos, completeHandler, deleteHandler }) => {
 }
 
 List.propTypes = {
+  completeHandler: PropTypes.func,
   currentTodos: PropTypes.array,
-  handler: PropTypes.func
+  deleteHandler: PropTypes.func
 }
