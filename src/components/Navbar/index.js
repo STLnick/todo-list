@@ -40,6 +40,12 @@ export const Navbar = () => {
             <Link to='/about' className="button is-light">
               About
             </Link>
+            <Link to='/contact' className="button is-light">
+              Contact
+            </Link>
+            <Link to='/faq' className="button is-light">
+              FAQ
+            </Link>
           </div>
         </div>
       </div>
