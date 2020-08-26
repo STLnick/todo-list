@@ -1,12 +1,16 @@
 @import "./shared";
 
 #wrapper {
+  align-items: center;
   background-color: $lightBlue;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   min-height: 100vh;
 }
 
 .todo-box {
+  margin-top: 2rem;
   width: 70%;
 }
 
