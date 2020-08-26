@@ -4,7 +4,8 @@
 @import url("https://fonts.googleapis.com/css?family=Nunito:400,700");
 
 // Set your brand colors
-$purple: #8a4d76;
+$lightBlue: #1090ef;
+$blue: #0d6db6;
 $pink: #fa7c91;
 $brown: #757763;
 $beige-light: #d0d1cd;
@@ -16,7 +17,8 @@ $family-sans-serif: "Nunito", -apple-system, blinkmacsystemfont, "Segoe UI",
   "Helvetica Neue", sans-serif;
 $grey-dark: $brown;
 $grey-light: $beige-light;
-$primary: $purple;
+$primary: $lightBlue;
+$primary-dark: $blue;
 $link: $pink;
 $widescreen-enabled: true;
 $fullhd-enabled: true;
