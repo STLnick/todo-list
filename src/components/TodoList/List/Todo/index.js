@@ -23,7 +23,7 @@ export const Todo = ({ completed, completeHandler, deleteHandler, id, text }) =>
           />
         </div>
         <div className="column has-text-danger">
-          <span data-id={id} onClick={deleteHandler} onKeyUp={deleteHandler}>
+          <span tabIndex="0" role="button" data-id={id} onClick={deleteHandler} onKeyUp={deleteHandler}>
             <FontAwesomeIcon icon={faTrashAlt} />
           </span>
         </div>
