@@ -63,7 +63,7 @@ export const TodoList = () => {
   return (
     <div className="todo-box box p-4">
       <h2
-        className="title py-3 has-text-centered is-family-monospace is-uppercase has-background-success-dark has-text-white">
+        className="title py-3 has-text-centered is-family-monospace is-uppercase has-background-primary-dark has-text-white">
         Todo List
       </h2>
       <Display numComplete={calcCompletedTodos()} numTodos={todos.length} />

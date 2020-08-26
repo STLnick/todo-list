@@ -8,7 +8,7 @@ export const Form = ({ inputHandler, submitHandler, text }) => {
       <div className="field is-flex">
         <label className="screen-reader-text" htmlFor="new-todo">New Todo</label>
         <input
-          className="input is-rounded is-success"
+          className="input is-rounded is-primary"
           id="new-todo"
           onChange={inputHandler}
           placeholder="New Todo..."
@@ -16,7 +16,7 @@ export const Form = ({ inputHandler, submitHandler, text }) => {
           value={text} />
         <p className="help">e.g. Take out the Trash</p>
         <button
-          className="button is-success is-uppercase has-text-weight-bold"
+          className="button is-primary is-uppercase has-text-weight-bold"
           id="submitBtn"
           type="submit"
         >
