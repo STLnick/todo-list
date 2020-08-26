@@ -21,7 +21,7 @@ export const List = ({ currentTodos, completeHandler, deleteHandler }) => {
   }
 
   return (
-    <ol className="has-text-centered mb-5 px-4">
+    <ol className="list has-text-centered mb-5 px-4">
       {renderTodos()}
     </ol>
   )
