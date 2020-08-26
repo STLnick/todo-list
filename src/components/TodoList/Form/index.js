@@ -3,13 +3,19 @@ import PropTypes from 'prop-types'
 
 import './Form.css'
 
-export const Form = ({ handler }) => {
+export const Form = ({ inputHandler, submitHandler, text }) => {
 
   return (
-    <form className="has-text-centered" onSubmit={handler}>
+    <form className="has-text-centered" onSubmit={submitHandler}>
       <div className="field is-flex">
         <label className="screen-reader-text" htmlFor="new-todo">New Todo</label>
-        <input className="input is-rounded is-success" id="new-todo" placeholder="New Todo..." type="text" />
+        <input
+          className="input is-rounded is-success"
+          id="new-todo"
+          onChange={inputHandler}
+          placeholder="New Todo..."
+          type="text"
+          value={text} />
         <p className="help">e.g. Take out the Trash</p>
         <button
           className="button is-success is-uppercase has-text-weight-bold"
@@ -24,5 +30,7 @@ export const Form = ({ handler }) => {
 }
 
 Form.propTypes = {
-  handler: PropTypes.func
+  inputHandler: PropTypes.func,
+  submitHandler: PropTypes.func,
+  text: PropTypes.string
 }

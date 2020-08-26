@@ -29,19 +29,14 @@ const reducer = (state, action) => {
 }
 
 export const TodoList = () => {
-  const [todos, dispatch] = useReducer(reducer, initialState)
+  const [inputText, setInputText] = useState('')
+  const [todos, dispatch] = useReducer(reducer, initialState);
+
+  (async () => {
+    // TODO: fetch todos and add to todos state with dispatch
+  })()
 
   const calcCompletedTodos = () => todos.filter(({ completed }) => completed).length
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-
-    if (e.target.querySelector('#new-todo').value) {
-      dispatch({ type: 'ADD', text: e.target.querySelector('#new-todo').value })
-    }
-
-    e.target.querySelector('#new-todo').value = ''
-  }
 
   const handleCompleteTodo = ({ target: { checked } }, targetId) => {
     dispatch({ type: 'TOGGLE', checked, id: targetId })
@@ -49,6 +44,20 @@ export const TodoList = () => {
 
   const handleDeleteTodo = (e) => {
     dispatch({ type: 'DELETE', id: Number(e.target.closest('span').dataset.id) })
+  }
+
+  const handleInputChange = (e) => {
+    setInputText(e.target.value)
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    if (inputText) {
+      dispatch({ type: 'ADD', text: inputText })
+    }
+
+    setInputText('')
   }
 
   return (
@@ -63,7 +72,7 @@ export const TodoList = () => {
         completeHandler={handleCompleteTodo}
         deleteHandler={handleDeleteTodo}
       />
-      <Form handler={handleSubmit} />
+      <Form inputHandler={handleInputChange} submitHandler={handleSubmit} text={inputText} />
     </div>
   )
 }
