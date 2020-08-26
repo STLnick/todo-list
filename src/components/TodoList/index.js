@@ -1,48 +1,54 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useReducer, useState } from 'react'
 import api from 'api'
 
 import { Display } from './Display'
 import { Form } from './Form'
 import { List } from './List'
 
+const initialState = []
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'ADD':
+      return state.concat({
+        completed: false,
+        id: state.length + 1,
+        text: action.text
+      })
+    case 'DELETE':
+      return state.filter(todo => todo.id !== action.id)
+    case 'TOGGLE':
+      return state.map(todo => {
+        return todo.id === action.id
+          ? { ...todo, completed: action.checked }
+          : todo
+      })
+    default:
+      throw new Error()
+  }
+}
+
 export const TodoList = () => {
-  const [todos, setTodos] = useState([])
+  const [state, dispatch] = useReducer(reducer, initialState)
 
-  useEffect(() => {
-    (async () => {
-      setTodos(await api.index())
-    })()
-  }, [])
-
-  const calcCompletedTodos = () => todos.filter(({ completed }) => completed).length
+  const calcCompletedTodos = () => state.filter(({ completed }) => completed).length
 
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    const newTodo = {
-      completed: false,
-      id: Date.now(),
-      text: e.target.querySelector('#new-todo').value
+    if (e.target.querySelector('#new-todo').value) {
+      dispatch({ type: 'ADD', text: e.target.querySelector('#new-todo').value })
     }
-
-    if (e.target.querySelector('#new-todo').value)
-      setTodos([...todos, newTodo])
 
     e.target.querySelector('#new-todo').value = ''
   }
 
   const handleCompleteTodo = ({ target: { checked } }, targetId) => {
-    const targetTodo = todos.find(({ id }) => id === targetId)
-
-    targetTodo.completed = checked
-
-    setTodos(prevState => prevState.map(todo => todo.id === targetTodo.id ? targetTodo : todo))
+    dispatch({ type: 'TOGGLE', checked, id: targetId })
   }
 
   const handleDeleteTodo = (e) => {
-    const targetId = Number(e.target.closest('span').dataset.id)
-
-    setTodos(() => todos.filter(({ id }) => id !== targetId))
+    dispatch({ type: 'DELETE', id: Number(e.target.closest('span').dataset.id) })
   }
 
   return (
@@ -51,9 +57,9 @@ export const TodoList = () => {
         className="title py-3 has-text-centered is-family-monospace is-uppercase has-background-success-dark has-text-white">
         Todo List
       </h2>
-      <Display numComplete={calcCompletedTodos()} numTodos={todos.length} />
+      <Display numComplete={calcCompletedTodos()} numTodos={state.length} />
       <List
-        currentTodos={todos}
+        currentTodos={state}
         completeHandler={handleCompleteTodo}
         deleteHandler={handleDeleteTodo}
       />
