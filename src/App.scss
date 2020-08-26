@@ -1,4 +1,10 @@
+@import "./shared";
+
 #wrapper {
   justify-content: center;
   min-height: 100vh;
+}
+
+.todo-box {
+  width: 70%;
 }

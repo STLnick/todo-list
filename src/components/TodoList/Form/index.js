@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import './Form.css'
+import './Form.scss'
 
 export const Form = ({ inputHandler, submitHandler, text }) => {
 

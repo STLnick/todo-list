@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 
-import './Todo.css'
+import './Todo.scss'
 
 export const Todo = ({ completed, completeHandler, deleteHandler, id, text }) => {
   return (
