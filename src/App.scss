@@ -2,7 +2,7 @@
 
 #wrapper {
   align-items: center;
-  background-color: $lightBlue;
+  background: linear-gradient($lightBlue, #eee 40%);
   display: flex;
   flex-direction: column;
   justify-content: center;
