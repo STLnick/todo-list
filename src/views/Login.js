@@ -42,7 +42,7 @@ export const Login = () => {
         onChange={formik.handleChange}
         placeholder="Name"
         value={formik.values.name} />
-      {formik.errors.name ? <p className="has-text-danger">{formik.errors.name}</p> : null}
+      {formik.touched.name && formik.errors.name ? <p className="has-text-danger">{formik.errors.name}</p> : null}
       <input
         type="text"
         name="email"
@@ -51,7 +51,7 @@ export const Login = () => {
         onChange={formik.handleChange}
         placeholder="Email"
         value={formik.values.email} />
-      {formik.errors.email ? <p className="has-text-danger">{formik.errors.email}</p> : null}
+      {formik.touched.email && formik.errors.email ? <p className="has-text-danger">{formik.errors.email}</p> : null}
       <input
         type="password"
         name="password"
@@ -60,7 +60,7 @@ export const Login = () => {
         onChange={formik.handleChange}
         placeholder="Password"
         value={formik.values.password} />
-      {formik.errors.password ? <p className="has-text-danger">{formik.errors.password}</p> : null}
+      {formik.touched.password && formik.errors.password ? <p className="has-text-danger">{formik.errors.password}</p> : null}
       <button type="submit">Login</button>
     </form>
   )
