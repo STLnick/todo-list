@@ -9,7 +9,7 @@ export const Login = () => {
     if (!utils.validateInput(values.name, utils.lettersRegex)) {
       errors.name = 'Name is required.'
     }
-    if (!values.email || !utils.validateInput(values.email, utils.emailRegex)) {
+    if (!values.email || !(utils.emailRegex).test(values.email)) {
       errors.email = 'Valid email is required.'
     }
     if (!values.password) {
@@ -38,22 +38,25 @@ export const Login = () => {
         type="text"
         name="name"
         id="name"
+        onBlur={formik.handleBlur}
         onChange={formik.handleChange}
         placeholder="Name"
         value={formik.values.name} />
       {formik.errors.name ? <p className="has-text-danger">{formik.errors.name}</p> : null}
       <input
-        type="email"
+        type="text"
         name="email"
         id="email"
+        onBlur={formik.handleBlur}
         onChange={formik.handleChange}
         placeholder="Email"
         value={formik.values.email} />
-      {formik.errors.name ? <p className="has-text-danger">{formik.errors.email}</p> : null}
+      {formik.errors.email ? <p className="has-text-danger">{formik.errors.email}</p> : null}
       <input
         type="password"
         name="password"
         id="password"
+        onBlur={formik.handleBlur}
         onChange={formik.handleChange}
         placeholder="Password"
         value={formik.values.password} />
