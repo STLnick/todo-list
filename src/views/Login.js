@@ -1,23 +1,8 @@
 import React from 'react'
 import { useFormik } from 'formik'
-import utils from 'utils'
+import * as Yup from 'yup'
 
 export const Login = () => {
-  const validate = values => {
-    const errors = {}
-
-    if (!utils.validateInput(values.name, utils.lettersRegex)) {
-      errors.name = 'Name is required.'
-    }
-    if (!values.email || !(utils.emailRegex).test(values.email)) {
-      errors.email = 'Valid email is required.'
-    }
-    if (!values.password) {
-      errors.password = 'Password is required.'
-    }
-
-    return errors
-  }
 
   const formik = useFormik({
     initialValues: {
@@ -25,7 +10,11 @@ export const Login = () => {
       password: '',
       name: ''
     },
-    validate,
+    validationSchema: Yup.object({
+      name: Yup.string().required('Name is required'),
+      email: Yup.string().email('Invalid email address!').required('Email is required'),
+      password: Yup.string().min(6).required('Password is required'),
+    }),
     onSubmit: values => {
       console.log('submission: ', values)
     }
