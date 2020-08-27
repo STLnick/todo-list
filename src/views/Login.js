@@ -8,11 +8,9 @@ export const Login = () =>
     <Formik
       initialValues={{
         email: '',
-        password: '',
-        name: ''
+        password: ''
       }}
       validationSchema={Yup.object({
-        name: Yup.string().required('Name is required'),
         email: Yup.string().email('Invalid email address!').required('Email is required'),
         password: Yup.string().min(6).required('Password is required'),
       })}
@@ -22,16 +20,6 @@ export const Login = () =>
       }}
     >
       <Form>
-        <div className="field">
-          <label htmlFor="name">Name</label>
-          <div className="control">
-            <Field className="input is-primary mb-5" name="name" type="text" />
-            <p className="help is-danger">
-              <ErrorMessage name="name" />
-            </p>
-          </div>
-        </div>
-
         <div className="field">
           <label htmlFor="email">Email</label>
           <div className="control">
@@ -50,8 +38,8 @@ export const Login = () =>
               <ErrorMessage name="password" />
             </p>
           </div>
-          <button className="button is-primary" type="submit">Login</button>
         </div>
+        <button className="button is-primary" type="submit">Login</button>
       </Form>
     </Formik>
   </div>
