@@ -20,9 +20,11 @@ export const Home = () => {
             to='/register'>
             Get Started
           </Link>
-          <h2 className="subtitle">
-            Login
-          </h2>
+          <Link to='/login'>
+            <h2 className="subtitle">
+              Login
+            </h2>
+          </Link>
         </div>
       </div>
     </section>
