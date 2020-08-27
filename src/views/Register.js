@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import * as Yup from 'yup'
 
@@ -51,7 +52,13 @@ export const Register = () =>
             </p>
           </div>
         </div>
-        <button className="button is-primary" type="submit">Sign Up</button>
+        <button className="button is-primary mb-6" type="submit">Sign Up</button>
+        <p>Already registered?</p>
+        <Link to='/login'>
+          <p className="">
+            Login
+          </p>
+        </Link>
       </Form>
     </Formik>
   </div>
