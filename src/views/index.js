@@ -1,6 +1,6 @@
-export { About } from './About'
 export { Contact } from './Contact'
 export { FAQ } from './FAQ'
+export { Home } from './Home'
 export { Login } from './Login'
 export { Register } from './Register'
 export { TodoView } from './TodoView'

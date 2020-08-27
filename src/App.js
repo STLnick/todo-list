@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import { Navbar } from './components'
-import { About, Contact, FAQ, Login, Register, TodoView } from './views'
+import { Contact, FAQ, Home, Login, Register, TodoView } from './views'
 
 import './App.scss';
 
@@ -13,10 +13,10 @@ export const App = () => {
       <div id="wrapper">
         <Switch>
           <Route exact path="/">
-            <TodoView />
+            <Home />
           </Route>
-          <Route path='/about'>
-            <About />
+          <Route exact path="/todo">
+            <TodoView />
           </Route>
           <Route path='/contact'>
             <Contact />
