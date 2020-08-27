@@ -11,10 +11,10 @@ export const Navbar = () => {
 
   return <nav className="navbar" role="navigation" aria-label="main navigation">
     <div className="navbar-brand">
-      <span className="navbar-item" href="https://bulma.io">
+      <Link to='/' className="navbar-item" href="https://bulma.io">
         <img src={logo} alt="Todo App Logo" width="35" height="35" />
         Todo List App
-      </span>
+      </Link>
 
       <a
         aria-expanded="false"
@@ -31,20 +31,26 @@ export const Navbar = () => {
     </div>
 
     <div id="navbarBasicExample" className="navbar-menu">
+      <div className="navbar-start">
+        <Link to='/about' className="navbar-item">
+          About
+        </Link>
+        <Link to='/contact' className="navbar-item">
+          Contact
+        </Link>
+        <Link to='/faq' className="navbar-item">
+          FAQ
+        </Link>
+      </div>
+
       <div className="navbar-end">
         <div className="navbar-item">
           <div className="buttons">
-            <Link to='/' className="button is-primary">
-              <strong>Todo App</strong>
+            <Link to='/login' className="button is-primary">
+              Login
             </Link>
-            <Link to='/about' className="button is-light">
-              About
-            </Link>
-            <Link to='/contact' className="button is-light">
-              Contact
-            </Link>
-            <Link to='/faq' className="button is-light">
-              FAQ
+            <Link to='/register' className="button is-light">
+              Register
             </Link>
           </div>
         </div>

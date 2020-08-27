@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import { Navbar } from './components'
-import { About, Contact, FAQ, TodoView } from './views'
+import { About, Contact, FAQ, Login, Register, TodoView } from './views'
 
 import './App.scss';
 
@@ -23,6 +23,12 @@ export const App = () => {
           </Route>
           <Route path='/faq'>
             <FAQ />
+          </Route>
+          <Route path='/login'>
+            <Login />
+          </Route>
+          <Route path='/register'>
+            <Register />
           </Route>
         </Switch>
       </div>
