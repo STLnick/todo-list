@@ -17,3 +17,9 @@
 .list {
   min-height: 200px;
 }
+
+@media screen and (max-width: 500px) {
+  .todo-box {
+    width: 90%;
+  }
+}
