@@ -4,6 +4,7 @@ import * as Yup from 'yup'
 
 export const Login = () =>
   <div className="box has-text-centered mx-3">
+    <h2 className="is-size-3 mb-5">User Login</h2>
     <Formik
       initialValues={{
         email: '',
@@ -21,18 +22,36 @@ export const Login = () =>
       }}
     >
       <Form>
-        <label htmlFor="name">Name</label>
-        <Field name="name" type="text" />
-        <ErrorMessage name="name" />
+        <div className="field">
+          <label htmlFor="name">Name</label>
+          <div className="control">
+            <Field className="input is-primary mb-5" name="name" type="text" />
+            <p className="help is-danger">
+              <ErrorMessage name="name" />
+            </p>
+          </div>
+        </div>
 
-        <label htmlFor="email">Email</label>
-        <Field name="email" type="text" />
-        <ErrorMessage name="email" />
+        <div className="field">
+          <label htmlFor="email">Email</label>
+          <div className="control">
+            <Field className="input is-primary mb-5" name="email" type="text" />
+            <p className="help is-danger">
+              <ErrorMessage name="email" />
+            </p>
+          </div>
+        </div>
 
-        <label htmlFor="password">Password</label>
-        <Field name="password" type="password" />
-        <ErrorMessage name="password" />
-        <button className="button is-primary" type="submit">Login</button>
+        <div className="field">
+          <label htmlFor="password">Password</label>
+          <div className="control">
+            <Field className="input is-primary mb-5" name="password" type="password" />
+            <p className="help is-danger">
+              <ErrorMessage name="password" />
+            </p>
+          </div>
+          <button className="button is-primary" type="submit">Login</button>
+        </div>
       </Form>
     </Formik>
   </div>
