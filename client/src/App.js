@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import { Navbar } from './components'
+import { Footer, Navbar } from './components'
 import { Contact, FAQ, Home, Login, Register, TodoView } from './views'
 
 import './App.scss';
@@ -32,6 +32,7 @@ export const App = () => {
           </Route>
         </Switch>
       </div>
+      <Footer />
     </>
   );
 }
