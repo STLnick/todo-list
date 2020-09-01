@@ -10,8 +10,5 @@ export const Login = () => {
     setLoginMode(location.search.includes('?login'))
   }, [location.search])
 
-  console.log(loginMode)
-  console.log(location)
-
   return loginMode ? <LoginForm /> : <RegisterForm />
 }
