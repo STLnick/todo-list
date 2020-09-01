@@ -1,21 +1,27 @@
 import { Router } from 'express';
 
-// TODO: Import methods from '../db' to perform todo database interactions
+import { dbTodos } from '../db';
 
 const router = Router();
 
-router.get('/', (req, res) => {
-  // Fetch all todos
+// Fetch all todos
+router.get('/', async (req, res) => {
+  res.status(200).json(await dbTodos.getAll());
 });
 
-router.post('/add', (req, res) => {
-  // Add a todo
+// Add a todo
+router.post('/add', async (req, res) => {
+  res.status(201).json(await dbTodos.add(req.body));
 });
 
-router.delete('/delete', (req, res) => {
-  // Delete a todo
+// Delete a todo
+router.delete('/delete/:id', async (req, res) => {
+  res.status(204).json(await dbTodos.delete(req.params.id));
 });
 
-// TODO: Add an 'update' route - also need to implement way to change a 'todo' in the UI
+// Update a todo
+router.patch('/update/:id', async (req, res) => {
+  res.status(201).json(await dbTodos.update(req.params.id, req.body));
+});
 
 export default router;

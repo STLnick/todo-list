@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import querystring from 'querystring';
 
 import { dbUsers } from '../db';
 
@@ -7,13 +6,12 @@ const router = Router();
 
 // Fetch all users
 router.get('/', async (req, res) => {
-  res.status(200).json(await dbUsers.getall());
+  res.status(200).json(await dbUsers.getAll());
 });
 
-// Fetch one user by id
-router.get('/:id', async (req, res) => {
-  const query = querystring.parse(req.url.slice(req.url.indexOf('?') + 1));
-  res.status(200).json(await dbUsers.getById(query.id));
+// Login a user
+router.post('/', async (req, res) => {
+  res.status(200).json(await dbUsers.loginUser(req.body));
 });
 
 // Add a user
@@ -22,9 +20,13 @@ router.post('/add', async (req, res) => {
 });
 
 // Delete a user
-router.delete('/delete', async (req, res) => {
+router.delete('/delete/:id', async (req, res) => {
+  res.status(204).json(await dbUsers.delete(req.params.id));
 });
 
-// TODO: Add an 'update' route - also need to implement way to change a 'user' in the UI
+// Update a user
+router.patch('/update/:id', async (req, res) => {
+  res.status(201).json(await dbUsers.update(req.params.id, req.body));
+});
 
 export default router;

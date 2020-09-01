@@ -3,25 +3,9 @@ import client from './client';
 
 /* * Users * */
 export const dbUsers = {
-  getAll: async () => {
-    try {
-      return await client.db('todoapp').collection('users').find().toArray();
-    } catch (err) {
-      throw new Error(err);
-    }
-  },
-
-  getById: async (id) => {
-    try {
-      return await client.db('todoapp').collection('users').find({ _id: ObjectId(id) });
-    } catch (err) {
-      throw new Error(err);
-    }
-  },
-
   add: async (user) => {
     try {
-      return await client.db('todoapp').collection('users').insertOne();
+      return await client.db('todoapp').collection('users').insertOne(user);
     } catch (err) {
       throw new Error(err);
     }
@@ -35,11 +19,27 @@ export const dbUsers = {
     }
   },
 
+  getAll: async () => {
+    try {
+      return await client.db('todoapp').collection('users').find().toArray();
+    } catch (err) {
+      throw new Error(err);
+    }
+  },
+
+  loginUser: async (userInfo) => {
+    try {
+      return await client.db('todoapp').collection('users').findOne(userInfo);
+    } catch (err) {
+      throw new Error(err);
+    }
+  },
+
   update: async (id, propsToUpdate) => {
     try {
       return await client.db('todoapp').collection('users').findOneAndUpdate(
-        { _id: id }, // Find by ID
-        { ...propsToUpdate }, // Update with passed in properties and values
+        { _id: ObjectId(id) }, // Find by ID
+        { $set: { ...propsToUpdate } }, // Update with passed in properties and values
         { returnNewDocument: true }, // Return new document to update state in client-side
       );
     } catch (err) {
@@ -50,22 +50,6 @@ export const dbUsers = {
 
 /* * Todos * */
 export const dbTodos = {
-  getAll: async () => {
-    try {
-      return await client.db('todoapp').collection('todos').find().toArray();
-    } catch (err) {
-      throw new Error(err);
-    }
-  },
-
-  getById: async (id) => {
-    try {
-      return await client.db('todoapp').collection('todos').find({ _id: ObjectId(id) });
-    } catch (err) {
-      throw new Error(err);
-    }
-  },
-
   add: async (todo) => {
     try {
       return await client.db('todoapp').collection('todos').insertOne(todo);
@@ -82,11 +66,27 @@ export const dbTodos = {
     }
   },
 
+  getAll: async () => {
+    try {
+      return await client.db('todoapp').collection('todos').find().toArray();
+    } catch (err) {
+      throw new Error(err);
+    }
+  },
+
+  getById: async (id) => {
+    try {
+      return await client.db('todoapp').collection('todos').find({ _id: ObjectId(id) });
+    } catch (err) {
+      throw new Error(err);
+    }
+  },
+
   update: async (id, propsToUpdate) => {
     try {
       return await client.db('todoapp').collection('todos').findOneAndUpdate(
-        { _id: id }, // Find by ID
-        { ...propsToUpdate }, // Update with passed in properties and values
+        { _id: ObjectId(id) }, // Find by ID
+        { $set: propsToUpdate }, // Update with passed in properties and values
         { returnNewDocument: true }, // Return new document to update state in client-side
       );
     } catch (err) {
