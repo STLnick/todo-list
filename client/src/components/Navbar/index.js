@@ -11,7 +11,7 @@ export const Navbar = () => {
 
   return <nav className="navbar" role="navigation" aria-label="main navigation">
     <div className="navbar-brand">
-      <Link to='/todo' className="navbar-item" href="https://bulma.io">
+      <Link to='/' className="navbar-item" href="https://bulma.io">
         <img src={logo} alt="Todo App Logo" width="35" height="35" />
         Todo List App
       </Link>
