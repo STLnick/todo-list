@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import { Footer, Navbar } from './components'
-import { Contact, FAQ, Home, Login, Register, TodoView } from './views'
+import { Contact, FAQ, Home, Login, NotFound, Register, TodoView } from './views'
 
 import './App.scss';
 
@@ -29,6 +29,9 @@ export const App = () => {
           </Route>
           <Route path='/register'>
             <Register />
+          </Route>
+          <Route>
+            <NotFound />
           </Route>
         </Switch>
       </div>
