@@ -1,15 +1,27 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import * as Yup from 'yup'
+
+import { Options } from './Options'
 
 export const Login = () => {
   const location = useLocation()
   const [loginMode, setLoginMode] = useState(location.search.includes('?login'))
+  const [forgotPwMode, setForgotPwMode] = useState(location.search.includes('?forgot'))
 
-  useEffect(() => {
-    setLoginMode(location.search.includes('login'))
-  }, [location.search])
+  const handleLoginModeClick = () => {
+    setForgotPwMode(false)
+    setLoginMode(prevMode => !prevMode)
+  }
+
+  const handleForgotModeClick = () => {
+    setForgotPwMode(prevMode => !prevMode)
+    setLoginMode(false)
+  }
+
+  let buttonText = loginMode ? 'Login' : 'Sign Up'
+  buttonText = forgotPwMode ? 'Get Password' : buttonText
 
   return (
     <div className="box has-text-centered mx-3">
@@ -31,7 +43,7 @@ export const Login = () => {
         }}
       >
         <Form>
-          {!loginMode
+          {!loginMode && !forgotPwMode
             ? (<div className="field">
               <label htmlFor="name">Name</label>
               <div className="control">
@@ -53,24 +65,30 @@ export const Login = () => {
             </div>
           </div>
 
-          <div className="field">
-            <label htmlFor="password">Password</label>
-            <div className="control">
-              <Field className="input is-primary mb-5" name="password" type="password" />
-              <p className="help is-danger">
-                <ErrorMessage name="password" />
-              </p>
-            </div>
-          </div>
-          <button className="button is-primary mb-6" type="submit">Sign Up</button>
-          <p>{loginMode ? 'Not registered yet?' : 'Already registered?'}</p>
-          <Link to={loginMode ? '/login' : '/login?login'}>
-            <p className="">
-              {loginMode ? 'Register' : 'Login'}
-            </p>
-          </Link>
+          {!forgotPwMode
+            ? (<div className="field">
+              <label htmlFor="password">Password</label>
+              <div className="control">
+                <Field className="input is-primary mb-5" name="password" type="password" />
+                <p className="help is-danger">
+                  <ErrorMessage name="password" />
+                </p>
+              </div>
+            </div>)
+            : null
+          }
+
+          <button className="button is-primary mb-6" type="submit">
+            {buttonText}
+          </button>
         </Form>
       </Formik>
+      <Options
+        forgotPwMode={forgotPwMode}
+        forgotPwModeClickHandler={handleForgotModeClick}
+        loginMode={loginMode}
+        loginModeClickHandler={handleLoginModeClick}
+      />
     </div>
   )
 }
