@@ -4,9 +4,9 @@ import { dbTodos } from '../db';
 
 const router = Router();
 
-// Fetch all todos
-router.get('/', async (req, res) => {
-  res.status(200).json(await dbTodos.getAll());
+// Fetch all todos for a user
+router.get('/:id', async (req, res) => {
+  res.status(200).json(await dbTodos.getAll(req.params.id));
 });
 
 // Add a todo

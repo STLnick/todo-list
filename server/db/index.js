@@ -66,9 +66,9 @@ export const dbTodos = {
     }
   },
 
-  getAll: async () => {
+  getAll: async (userId) => {
     try {
-      return await client.db('todoapp').collection('todos').find().toArray();
+      return await client.db('todoapp').collection('todos').find({ userId }).toArray();
     } catch (err) {
       throw new Error(err);
     }
