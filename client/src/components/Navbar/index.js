@@ -46,10 +46,10 @@ export const Navbar = () => {
       <div className="navbar-end">
         <div className="navbar-item">
           <div className="buttons">
-            <Link to='/login' className="button is-light">
+            <Link to='/login?login' className="button is-light">
               Login
             </Link>
-            <Link to='/register' className="button is-primary">
+            <Link to='/login' className="button is-primary">
               Register
             </Link>
           </div>

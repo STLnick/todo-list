@@ -1,3 +1,5 @@
 export { Footer } from './Footer'
+export { LoginForm } from './LoginForm'
 export { Navbar } from './Navbar'
+export { RegisterForm } from './RegisterForm'
 export { TodoList } from './TodoList'

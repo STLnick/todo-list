@@ -13,10 +13,10 @@ export const Home = () => {
           </h1>
           <Link
             class="button is-primary is-size-5 has-text-weight-bold cta-button"
-            to='/register'>
+            to='/login'>
             Get Started
           </Link>
-          <Link to='/login'>
+          <Link to='/login?login'>
             <h2 className="subtitle">
               Login
             </h2>
