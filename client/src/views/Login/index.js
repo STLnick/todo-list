@@ -10,22 +10,24 @@ export const Login = () => {
   const [loginMode, setLoginMode] = useState(location.search.includes('?login'))
   const [forgotPwMode, setForgotPwMode] = useState(location.search.includes('?forgot'))
 
-  const handleLoginModeClick = () => {
-    setForgotPwMode(false)
-    setLoginMode(prevMode => !prevMode)
+  const handleClick = (e) => {
+    if (e.target.textContent.includes('Forgot')) {
+      setForgotPwMode(true)
+    } else {
+      setForgotPwMode(false)
+      setLoginMode(prevMode => !prevMode)
+    }
   }
 
-  const handleForgotModeClick = () => {
-    setForgotPwMode(prevMode => !prevMode)
-    setLoginMode(false)
-  }
+  let titleText = loginMode ? 'Login' : 'Register'
+  titleText = forgotPwMode ? 'Forgot Password' : titleText
 
   let buttonText = loginMode ? 'Login' : 'Sign Up'
   buttonText = forgotPwMode ? 'Get Password' : buttonText
 
   return (
     <div className="box has-text-centered mx-3">
-      <h2 className="is-size-3 mb-5">{loginMode ? 'Login' : 'Register'}</h2>
+      <h2 className="is-size-3 mb-5">{titleText}</h2>
       <Formik
         initialValues={{
           email: '',
@@ -85,9 +87,8 @@ export const Login = () => {
       </Formik>
       <Options
         forgotPwMode={forgotPwMode}
-        forgotPwModeClickHandler={handleForgotModeClick}
+        handler={handleClick}
         loginMode={loginMode}
-        loginModeClickHandler={handleLoginModeClick}
       />
     </div>
   )
