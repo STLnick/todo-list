@@ -7,7 +7,7 @@ export const Login = () => {
   const [loginMode, setLoginMode] = useState(location.search.includes('?login'))
 
   useEffect(() => {
-    setLoginMode(location.search.includes('?login'))
+    setLoginMode(location.search.includes('login'))
   }, [location.search])
 
   return loginMode ? <LoginForm /> : <RegisterForm />
