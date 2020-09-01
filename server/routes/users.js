@@ -1,19 +1,28 @@
 import { Router } from 'express';
+import querystring from 'querystring';
 
-// TODO: Import methods from '../db' to perform user database interactions
+import { dbUsers } from '../db';
 
 const router = Router();
 
-router.get('/', (req, res) => {
-  // Fetch all users
+// Fetch all users
+router.get('/', async (req, res) => {
+  res.status(200).json(await dbUsers.getall());
 });
 
-router.post('/add', (req, res) => {
-  // Add a user
+// Fetch one user by id
+router.get('/:id', async (req, res) => {
+  const query = querystring.parse(req.url.slice(req.url.indexOf('?') + 1));
+  res.status(200).json(await dbUsers.getById(query.id));
 });
 
-router.delete('/delete', (req, res) => {
-  // Delete a user
+// Add a user
+router.post('/add', async (req, res) => {
+  res.status(201).json(await dbUsers.add(req.body));
+});
+
+// Delete a user
+router.delete('/delete', async (req, res) => {
 });
 
 // TODO: Add an 'update' route - also need to implement way to change a 'user' in the UI

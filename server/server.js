@@ -1,7 +1,6 @@
 import cors from 'cors';
 import dotenv from 'dotenv';
 import express from 'express';
-import got from 'got';
 
 import todos from './routes/todos';
 import users from './routes/users';
