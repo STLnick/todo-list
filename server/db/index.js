@@ -76,7 +76,7 @@ export const dbTodos = {
 
   getById: async (info) => {
     try {
-      return await client.db('todoapp').collection('todos').find({ userId: ObjectId(info.id) }).toArray();
+      return await client.db('todoapp').collection('todos').find({ userId: info.id }).toArray();
     } catch (err) {
       throw new Error(err);
     }
