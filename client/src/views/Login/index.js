@@ -39,9 +39,9 @@ export const Login = () => {
           name: ''
         }}
         validationSchema={Yup.object({
-          // name: Yup.string().required('Name is required'),
+          name: !loginMode && Yup.string().required('Name is required'),
           email: Yup.string().email('Invalid email address!').required('Email is required'),
-          // password: Yup.string().min(6).required('Password is required'),
+          password: !forgotPwMode && Yup.string().min(6).required('Password is required'),
         })}
         onSubmit={async (values, { setSubmitting }) => {
           const loginObj = { email: values.email, password: values.password }
