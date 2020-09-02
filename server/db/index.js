@@ -58,25 +58,17 @@ export const dbTodos = {
     }
   },
 
-  delete: async (id) => {
+  delete: async ({ _id }) => {
     try {
-      return await client.db('todoapp').collection('todos').deleteOne({ _id: ObjectId(id) });
+      return await client.db('todoapp').collection('todos').deleteOne({ _id: ObjectId(_id) });
     } catch (err) {
       throw new Error(err);
     }
   },
 
-  getAll: async (userId) => {
+  getById: async (userInfo) => {
     try {
-      return await client.db('todoapp').collection('todos').find({ userId }).toArray();
-    } catch (err) {
-      throw new Error(err);
-    }
-  },
-
-  getById: async (info) => {
-    try {
-      return await client.db('todoapp').collection('todos').find({ userId: info.id }).toArray();
+      return await client.db('todoapp').collection('todos').find({ userId: userInfo.id }).toArray();
     } catch (err) {
       throw new Error(err);
     }

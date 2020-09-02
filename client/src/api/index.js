@@ -40,10 +40,15 @@ export default (baseUrl = 'http://localhost:5000') => ({
       },
       body: JSON.stringify(clickedTodo)
     })
-
   },
 
-  async deleteTodo() {
-
+  async deleteTodo(clickedTodo) {
+    const res = await fetch(`${baseUrl}/todos/delete`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(clickedTodo)
+    })
   }
 })

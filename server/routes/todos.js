@@ -15,8 +15,8 @@ router.post('/add', async (req, res) => {
 });
 
 // Delete a todo
-router.delete('/delete/:id', async (req, res) => {
-  res.status(204).json(await dbTodos.delete(req.params.id));
+router.delete('/delete/', async (req, res) => {
+  res.status(204).json(await dbTodos.delete(req.body));
 });
 
 // Update a todo

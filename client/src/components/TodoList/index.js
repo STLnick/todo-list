@@ -52,11 +52,12 @@ export const TodoList = () => {
     dispatch({ type: 'TOGGLE', checked, _id: targetId })
   }
 
-  const handleDeleteTodo = (e) => {
+  const handleDeleteTodo = async (e) => {
+    const targetId = e.target.closest('span').dataset.id
     // Update database
-
+    await repo.deleteTodo({ _id: targetId })
     // Update state
-    dispatch({ type: 'DELETE', _id: Number(e.target.closest('span').dataset.id) })
+    dispatch({ type: 'DELETE', _id: targetId })
   }
 
   const handleInputChange = (e) => {
