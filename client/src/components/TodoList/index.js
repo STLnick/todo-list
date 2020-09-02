@@ -10,23 +10,20 @@ const repo = api()
 
 const initialState = []
 const reducer = (state, action) => {
-  switch (action.type) {
+  const { type, ...payload } = action
+  switch (type) {
     case 'ADD':
-      return state.concat({
-        completed: false,
-        id: state.length + 1,
-        text: action.text
-      })
+      return state.concat({ ...payload })
     case 'DELETE':
-      return state.filter(todo => todo.id !== action.id)
+      return state.filter(todo => todo._id !== payload._id)
     case 'TOGGLE':
       return state.map(todo => {
-        return todo._id === action.id
-          ? { ...todo, completed: action.checked }
+        return todo._id === payload._id
+          ? { ...todo, completed: payload.checked }
           : todo
       })
     case 'RETRIEVE':
-      return state.concat(action.dbTodos)
+      return state.concat(payload.dbTodos)
     default:
       throw new Error()
   }
@@ -52,27 +49,29 @@ export const TodoList = () => {
     // Update database
 
     // Update state
-    dispatch({ type: 'TOGGLE', checked, id: targetId })
+    dispatch({ type: 'TOGGLE', checked, _id: targetId })
   }
 
   const handleDeleteTodo = (e) => {
     // Update database
 
     // Update state
-    dispatch({ type: 'DELETE', id: Number(e.target.closest('span').dataset.id) })
+    dispatch({ type: 'DELETE', _id: Number(e.target.closest('span').dataset.id) })
   }
 
   const handleInputChange = (e) => {
     setInputText(e.target.value)
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     if (inputText) {
-      // Update database
-
+      // Create new todo object
+      const newTodo = { completed: false, title: inputText, userId: user._id }
+      // Update database and grab _id of inserted document
+      const { insertedId } = await repo.addTodo(newTodo)
       // Update state
-      dispatch({ type: 'ADD', text: inputText })
+      dispatch({ type: 'ADD', _id: insertedId, ...newTodo })
     }
     setInputText('')
   }

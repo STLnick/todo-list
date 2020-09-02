@@ -37,6 +37,6 @@ Todo.propTypes = {
   completed: PropTypes.bool,
   completeHandler: PropTypes.func,
   deleteHandler: PropTypes.func,
-  id: PropTypes.number,
+  id: PropTypes.string,
   title: PropTypes.string
 }
