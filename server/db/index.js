@@ -82,8 +82,9 @@ export const dbTodos = {
     }
   },
 
-  update: async (id, propsToUpdate) => {
+  update: async (todoInfo) => {
     try {
+      const { id, ...propsToUpdate } = todoInfo;
       return await client.db('todoapp').collection('todos').findOneAndUpdate(
         { _id: ObjectId(id) }, // Find by ID
         { $set: propsToUpdate }, // Update with passed in properties and values

@@ -20,8 +20,8 @@ router.delete('/delete/:id', async (req, res) => {
 });
 
 // Update a todo
-router.patch('/update/:id', async (req, res) => {
-  res.status(201).json(await dbTodos.update(req.params.id, req.body));
+router.patch('/update', async (req, res) => {
+  res.status(204).json(await dbTodos.update(req.body));
 });
 
 export default router;
