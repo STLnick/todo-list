@@ -21,7 +21,7 @@ const reducer = (state, action) => {
       return state.filter(todo => todo.id !== action.id)
     case 'TOGGLE':
       return state.map(todo => {
-        return todo.id === action.id
+        return todo._id === action.id
           ? { ...todo, completed: action.checked }
           : todo
       })
