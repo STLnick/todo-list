@@ -39,11 +39,9 @@ export const TodoList = () => {
 
   const user = location.state.user;
 
-  // TODO: fetch todos and add to todos state with dispatch
   useEffect(() => {
     (async () => {
       const dbTodos = await repo.getUserTodos({ id: location.state.user._id })
-      console.log('dbTodos: ', dbTodos)
       dispatch({ type: 'RETRIEVE', dbTodos })
     })()
   }, [location.state.user])
@@ -51,10 +49,16 @@ export const TodoList = () => {
   const calcCompletedTodos = () => todos.filter(({ completed }) => completed).length
 
   const handleCompleteTodo = ({ target: { checked } }, targetId) => {
+    // Update database
+
+    // Update state
     dispatch({ type: 'TOGGLE', checked, id: targetId })
   }
 
   const handleDeleteTodo = (e) => {
+    // Update database
+
+    // Update state
     dispatch({ type: 'DELETE', id: Number(e.target.closest('span').dataset.id) })
   }
 
@@ -64,11 +68,12 @@ export const TodoList = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-
     if (inputText) {
+      // Update database
+
+      // Update state
       dispatch({ type: 'ADD', text: inputText })
     }
-
     setInputText('')
   }
 
