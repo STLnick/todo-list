@@ -3,6 +3,7 @@ import { useLocation, useHistory } from 'react-router-dom'
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import * as Yup from 'yup'
 import api from 'api'
+import { removeEmptyProps } from 'utils'
 
 import { Options } from './Options'
 
@@ -44,12 +45,13 @@ export const Login = () => {
           password: !forgotPwMode && Yup.string().min(6).required('Password is required'),
         })}
         onSubmit={async (values, { setSubmitting }) => {
-          const loginObj = { email: values.email, password: values.password }
+          const loginObj = removeEmptyProps(values)
+          console.log(loginObj)
 
-          const res = await repo.loginUser(loginObj)
+          // const res = await repo.loginUser(loginObj)
 
           setSubmitting(false)
-          history.push('/todo', { user: res })
+          // history.push('/todo', { user: res })
         }}
       >
         <Form>
