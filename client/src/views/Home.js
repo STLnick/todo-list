@@ -10,7 +10,7 @@ export const Home = () => {
             Todo List App
           </h1>
           <Link
-            class="button is-primary is-size-5 has-text-weight-bold cta-button"
+            className="button is-primary is-size-5 has-text-weight-bold cta-button"
             to='/login'>
             Get Started
           </Link>
