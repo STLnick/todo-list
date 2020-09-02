@@ -54,7 +54,7 @@ export const Login = () => {
           // history.push('/todo', { user: res })
         }}
       >
-        <Form>
+        {({ resetForm }) => <Form>
           {!loginMode && !forgotPwMode
             ? (<div className="field">
               <label htmlFor="name">Name</label>
@@ -93,13 +93,14 @@ export const Login = () => {
           <button className="button is-primary mb-6" type="submit">
             {buttonText}
           </button>
-        </Form>
+          <Options
+            clickHandler={handleClick}
+            forgotPwMode={forgotPwMode}
+            loginMode={loginMode}
+            resetHandler={resetForm}
+          />
+        </Form>}
       </Formik>
-      <Options
-        forgotPwMode={forgotPwMode}
-        handler={handleClick}
-        loginMode={loginMode}
-      />
     </div>
   )
 }
