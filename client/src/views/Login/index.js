@@ -50,7 +50,6 @@ export const Login = () => {
 
           setSubmitting(false)
           history.push('/todo', { user: res })
-
         }}
       >
         <Form>
