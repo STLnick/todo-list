@@ -1,12 +1,14 @@
 import React, { useEffect, useReducer, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import api from 'api'
 
 import { Display } from './Display'
 import { Form } from './Form'
 import { List } from './List'
 
-const initialState = []
+const repo = api()
 
+const initialState = []
 const reducer = (state, action) => {
   switch (action.type) {
     case 'ADD':
@@ -23,18 +25,28 @@ const reducer = (state, action) => {
           ? { ...todo, completed: action.checked }
           : todo
       })
+    case 'RETRIEVE':
+      return state.concat(action.dbTodos)
     default:
       throw new Error()
   }
 }
 
 export const TodoList = () => {
+  const location = useLocation()
   const [inputText, setInputText] = useState('')
   const [todos, dispatch] = useReducer(reducer, initialState);
 
-  (async () => {
-    // TODO: fetch todos and add to todos state with dispatch
-  })()
+  const user = location.state.user;
+
+  // TODO: fetch todos and add to todos state with dispatch
+  useEffect(() => {
+    (async () => {
+      const dbTodos = await repo.getUserTodos({ id: location.state.user._id })
+      console.log('dbTodos: ', dbTodos)
+      dispatch({ type: 'RETRIEVE', dbTodos })
+    })()
+  }, [location.state.user])
 
   const calcCompletedTodos = () => todos.filter(({ completed }) => completed).length
 

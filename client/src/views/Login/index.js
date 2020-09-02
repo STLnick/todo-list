@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useHistory } from 'react-router-dom'
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import * as Yup from 'yup'
 import api from 'api'
@@ -9,6 +9,7 @@ import { Options } from './Options'
 const repo = api()
 
 export const Login = () => {
+  const history = useHistory()
   const location = useLocation()
   const [loginMode, setLoginMode] = useState(location.search.includes('?login'))
   const [forgotPwMode, setForgotPwMode] = useState(location.search.includes('?forgot'))
@@ -42,13 +43,14 @@ export const Login = () => {
           email: Yup.string().email('Invalid email address!').required('Email is required'),
           // password: Yup.string().min(6).required('Password is required'),
         })}
-        onSubmit={(values, { setSubmitting }) => {
-          console.log('submission: ', values)
+        onSubmit={async (values, { setSubmitting }) => {
           const loginObj = { email: values.email, password: values.password }
 
           const res = await repo.loginUser(loginObj)
 
           setSubmitting(false)
+          history.push('/todo', { user: res })
+
         }}
       >
         <Form>

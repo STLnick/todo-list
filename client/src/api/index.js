@@ -14,4 +14,15 @@ export default (baseUrl = 'http://localhost:5000') => ({
     })
     return await res.json()
   },
-}
+
+  async getUserTodos(userId) {
+    const res = await fetch(`${baseUrl}/todos`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(userId)
+    })
+    return await res.json()
+  }
+})
