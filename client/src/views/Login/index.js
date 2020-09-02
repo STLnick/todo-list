@@ -2,8 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import * as Yup from 'yup'
+import api from 'api'
 
 import { Options } from './Options'
+
+const repo = api()
 
 export const Login = () => {
   const location = useLocation()
@@ -41,6 +44,10 @@ export const Login = () => {
         })}
         onSubmit={(values, { setSubmitting }) => {
           console.log('submission: ', values)
+          const loginObj = { email: values.email, password: values.password }
+
+          const res = await repo.loginUser(loginObj)
+
           setSubmitting(false)
         }}
       >
