@@ -45,13 +45,23 @@ export const Login = () => {
           password: !forgotPwMode && Yup.string().min(6).required('Password is required'),
         })}
         onSubmit={async (values, { setSubmitting }) => {
-          const loginObj = removeEmptyProps(values)
-          console.log(loginObj)
+          const userInfoObj = removeEmptyProps(values)
 
-          // const res = await repo.loginUser(loginObj)
+          if (forgotPwMode) {
+            // Resetting Password
+            // TODO: Develop a way to send user a reset password or
+            // TODO: present some screen where they can enter a new pw
+          } else if (loginMode) {
+            // Logging In
+            setSubmitting(false)
+            const res = await repo.loginUser(userInfoObj)
+            history.push('/todo', { user: res })
+          } else {
+            // Registering
+            // TODO: Take user object and make POST req to /users/add
+            // TODO: If successful history.push('/todo', { user: userInfoObj })
+          }
 
-          setSubmitting(false)
-          // history.push('/todo', { user: res })
         }}
       >
         {({ resetForm }) => <Form>
