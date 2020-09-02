@@ -82,13 +82,12 @@ export const dbTodos = {
     }
   },
 
-  update: async (todoInfo) => {
+  update: async (toggledTodo) => {
     try {
-      const { id, ...propsToUpdate } = todoInfo;
+      const { _id, completed } = toggledTodo;
       return await client.db('todoapp').collection('todos').findOneAndUpdate(
-        { _id: ObjectId(id) }, // Find by ID
-        { $set: propsToUpdate }, // Update with passed in properties and values
-        { returnNewDocument: true }, // Return new document to update state in client-side
+        { _id: ObjectId(_id) }, // Find by ID
+        { $set: { completed } }, // Update with passed in properties and values
       );
     } catch (err) {
       throw new Error(err);

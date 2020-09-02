@@ -45,9 +45,9 @@ export const TodoList = () => {
 
   const calcCompletedTodos = () => todos.filter(({ completed }) => completed).length
 
-  const handleCompleteTodo = ({ target: { checked } }, targetId) => {
+  const handleCompleteTodo = async ({ target: { checked } }, targetId) => {
     // Update database
-
+    await repo.toggleTodo({ _id: targetId, completed: checked })
     // Update state
     dispatch({ type: 'TOGGLE', checked, _id: targetId })
   }

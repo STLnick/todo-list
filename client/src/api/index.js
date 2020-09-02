@@ -32,7 +32,14 @@ export default (baseUrl = 'http://localhost:5000') => ({
     return await res.json()
   },
 
-  async toggleTodo() {
+  async toggleTodo(clickedTodo) {
+    const res = await fetch(`${baseUrl}/todos/update`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(clickedTodo)
+    })
 
   },
 
