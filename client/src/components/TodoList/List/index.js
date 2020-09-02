@@ -6,7 +6,7 @@ import { Todo } from './Todo'
 export const List = ({ currentTodos, completeHandler, deleteHandler }) => {
 
   const renderTodos = () => {
-    return currentTodos.map(({ completed, id, text }) => {
+    return currentTodos.map(({ completed, id, title }) => {
       return (
         <Todo
           completed={completed}
@@ -14,7 +14,7 @@ export const List = ({ currentTodos, completeHandler, deleteHandler }) => {
           deleteHandler={deleteHandler}
           id={id}
           key={id}
-          text={text}
+          title={title}
         />
       )
     })

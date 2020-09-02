@@ -5,11 +5,11 @@ import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 
 import './Todo.scss'
 
-export const Todo = ({ completed, completeHandler, deleteHandler, id, text }) => {
+export const Todo = ({ completed, completeHandler, deleteHandler, id, title }) => {
   return (
     <li className="columns">
       <div className="column is-four-fifths">
-        <span className={`has-text-weight-semibold ${completed ? 'completed-todo' : null}`} >{text}</span>
+        <span className={`has-text-weight-semibold ${completed ? 'completed-todo' : null}`} >{title}</span>
       </div>
       <div className="columns column">
         <div className="column">
@@ -38,5 +38,5 @@ Todo.propTypes = {
   completeHandler: PropTypes.func,
   deleteHandler: PropTypes.func,
   id: PropTypes.number,
-  text: PropTypes.string
+  title: PropTypes.string
 }
