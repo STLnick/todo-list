@@ -76,7 +76,7 @@ export const Login = () => {
 
         }}
       >
-        {({ resetForm }) => <Form>
+        {({ isSubmitting, resetForm }) => <Form>
           {!loginMode && !forgotPwMode
             ? (<div className="field">
               <label htmlFor="name">Name</label>
@@ -112,7 +112,10 @@ export const Login = () => {
             : null
           }
 
-          <button className="button is-primary mb-6" type="submit">
+          <button
+            className="button is-primary mb-6"
+            disabled={isSubmitting}
+            type="submit">
             {buttonText}
           </button>
           <Options
