@@ -26,7 +26,7 @@ const containerVariants = {
 export const TodoView = () => {
   const { userId } = useContext(UserContext)
 
-  return userId ? <TodoList /> : <div className="todo-box box p-4">
+  return userId ? <TodoList /> : <motion.div className="todo-box box p-4"
     className="todo-box box p-4"
     initial="hidden"
     animate="visible"

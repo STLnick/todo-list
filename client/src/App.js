@@ -9,6 +9,7 @@ import { UserContext } from './UserContext'
 import './App.scss';
 
 export const App = () => {
+  const location = useLocation()
   const [userId, setUserId] = useState(null)
 
   const providerValue = useMemo(() => ({ userId, setUserId }), [userId, setUserId])
