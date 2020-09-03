@@ -1,5 +1,6 @@
 import React, { useEffect, useReducer, useState } from 'react'
 import { useLocation } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import api from 'api'
 
 import { Display } from './Display'
@@ -26,6 +27,25 @@ const reducer = (state, action) => {
       return state.concat(payload.dbTodos)
     default:
       throw new Error()
+  }
+}
+
+const containerVariants = {
+  hidden: {
+    opacity: 0,
+    x: '100vw'
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      delay: 0.75,
+      duration: 1.25
+    }
+  },
+  exit: {
+    x: '-100vw',
+    transition: { ease: 'easeInOut' }
   }
 }
 
@@ -78,7 +98,12 @@ export const TodoList = () => {
   }
 
   return (
-    <div className="todo-box box p-4">
+    <motion.div
+      className="todo-box box p-4"
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+      variants={containerVariants}>
       <h2
         className="title py-3 has-text-centered is-family-monospace is-uppercase has-background-primary-dark has-text-white">
         Todo List
@@ -90,6 +115,6 @@ export const TodoList = () => {
         deleteHandler={handleDeleteTodo}
       />
       <Form inputHandler={handleInputChange} submitHandler={handleSubmit} text={inputText} />
-    </div>
+    </motion.div>
   )
 }
