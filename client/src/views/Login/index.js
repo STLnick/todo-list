@@ -4,12 +4,15 @@ import { ErrorMessage, Field, Form, Formik } from 'formik'
 import * as Yup from 'yup'
 
 import api from 'api'
+import auth from 'auth'
 import { removeEmptyProps } from 'utils'
 
 import { Options } from './Options'
 import { UserContext } from '../../UserContext'
 
 const repo = api()
+
+console.log(auth)
 
 export const Login = () => {
   const history = useHistory()
