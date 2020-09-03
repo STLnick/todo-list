@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useLocation, useHistory } from 'react-router-dom'
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import * as Yup from 'yup'
@@ -52,26 +52,28 @@ export const Login = () => {
         })}
         onSubmit={async (values, { setSubmitting }) => {
           const userInfoObj = removeEmptyProps(values)
-          console.log(userInfoObj)
 
           if (forgotPwMode) {
             // Resetting Password
-            // TODO: Develop a way to send user a reset password or
-            // TODO: present some screen where they can enter a new pw
+            auth.sendPasswordResetEmail(userInfoObj.email)
           } else if (loginMode) {
             // Logging In
-            try {
-              const res = await repo.loginUser(userInfoObj)
-              setUser(res)
-              setSubmitting(false)
-              history.push('/todo', { user: res })
-            } catch (err) {
-              console.log(err)
-            }
+            auth.signInWithEmailAndPassword(userInfoObj.email, userInfoObj.password)
+              .then((res) => {
+                setSubmitting(false)
+                setUser(auth.currentUser.uid)
+                history.push('/todo', { userId: auth.currentUser.uid })
+              })
+              .catch((err) => console.log(err))
           } else {
             // Registering
-            // TODO: Take user object and make POST req to /users/add
-            // TODO: If successful history.push('/todo', { user: userInfoObj })
+            auth.createUserWithEmailAndPassword(userInfoObj.email, userInfoObj.password)
+              .then(async (res) => {
+                console.log('Account created: ', res)
+                await repo.addUser({ uid: auth.currentUser.uid })
+                history.push('/todo', { user: auth.currentUser.uid })
+              })
+              .catch((err) => console.log('Error: ', err))
           }
 
         }}

@@ -9,18 +9,13 @@ router.get('/', async (req, res) => {
   res.status(200).json(await dbUsers.getAll());
 });
 
-// Login a user
-router.post('/', async (req, res) => {
+// Add a user
+router.post('/add', async (req, res) => {
   try {
-    res.status(200).json(await dbUsers.loginUser(req.body));
+    res.status(200).json(await dbUsers.add(req.body));
   } catch (err) {
     return err;
   }
-});
-
-// Add a user
-router.post('/add', async (req, res) => {
-  res.status(201).json(await dbUsers.add(req.body));
 });
 
 // Delete a user

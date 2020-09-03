@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { UserContext } from '../../UserContext'
+import auth from 'auth'
 
 import logo from '../../todo.png'
 
@@ -16,6 +17,8 @@ export const Navbar = () => {
   const handleLogout = () => {
     // Remove the user from context
     setUser(null)
+    // Sign out from firebase auth
+    auth.signOut()
     history.push('/login?login')
   }
 

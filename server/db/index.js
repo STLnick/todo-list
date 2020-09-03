@@ -27,14 +27,6 @@ export const dbUsers = {
     }
   },
 
-  loginUser: async (userInfo) => {
-    try {
-      return await client.db('todoapp').collection('users').findOne(userInfo);
-    } catch (err) {
-      throw new Error(err);
-    }
-  },
-
   update: async (id, propsToUpdate) => {
     try {
       return await client.db('todoapp').collection('users').findOneAndUpdate(
@@ -66,9 +58,9 @@ export const dbTodos = {
     }
   },
 
-  getById: async (userInfo) => {
+  getById: async ({ userId }) => {
     try {
-      return await client.db('todoapp').collection('todos').find({ userId: userInfo.id }).toArray();
+      return await client.db('todoapp').collection('todos').find({ userId }).toArray();
     } catch (err) {
       throw new Error(err);
     }

@@ -1,6 +1,6 @@
 export default (baseUrl = 'http://localhost:5000') => ({
-  async loginUser(userInfo) {
-    const res = await fetch(`${baseUrl}/users`, {
+  async addUser(userInfo) {
+    const res = await fetch(`${baseUrl}/users/add`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

@@ -34,14 +34,14 @@ export const TodoList = () => {
   const [inputText, setInputText] = useState('')
   const [todos, dispatch] = useReducer(reducer, initialState);
 
-  const user = location.state.user;
+  const userId = location.state.userId;
 
   useEffect(() => {
     (async () => {
-      const dbTodos = await repo.getUserTodos({ id: location.state.user._id })
+      const dbTodos = await repo.getUserTodos({ userId })
       dispatch({ type: 'RETRIEVE', dbTodos })
     })()
-  }, [location.state.user])
+  }, [location.state.userId])
 
   const calcCompletedTodos = () => todos.filter(({ completed }) => completed).length
 
@@ -68,7 +68,7 @@ export const TodoList = () => {
     e.preventDefault()
     if (inputText) {
       // Create new todo object
-      const newTodo = { completed: false, title: inputText, userId: user._id }
+      const newTodo = { completed: false, title: inputText, userId }
       // Update database and grab _id of inserted document
       const { insertedId } = await repo.addTodo(newTodo)
       // Update state
