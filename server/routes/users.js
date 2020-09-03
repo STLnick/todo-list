@@ -11,7 +11,11 @@ router.get('/', async (req, res) => {
 
 // Login a user
 router.post('/', async (req, res) => {
-  res.status(200).json(await dbUsers.loginUser(req.body));
+  try {
+    res.status(200).json(await dbUsers.loginUser(req.body));
+  } catch (err) {
+    return err;
+  }
 });
 
 // Add a user
