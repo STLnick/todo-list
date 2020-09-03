@@ -1,12 +1,22 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useContext } from 'react'
+import { Link, useHistory } from 'react-router-dom'
+import { UserContext } from '../../UserContext'
 
 import logo from '../../todo.png'
 
 export const Navbar = () => {
+  const history = useHistory()
+  const { user, setUser } = useContext(UserContext)
+
   const handleBurgerClick = () => {
     document.querySelector('.navbar-burger').classList.toggle('is-active');
     document.querySelector('.navbar-menu').classList.toggle('is-active');
+  }
+
+  const handleLogout = () => {
+    // Remove the user from context
+    setUser(null)
+    history.push('/login?login')
   }
 
   return <nav className="navbar" role="navigation" aria-label="main navigation">
@@ -46,12 +56,21 @@ export const Navbar = () => {
       <div className="navbar-end">
         <div className="navbar-item">
           <div className="buttons">
-            <Link to='/login?login' className="button is-light">
-              Login
-            </Link>
-            <Link to='/login' className="button is-primary">
-              Register
-            </Link>
+            {user
+              ? <button
+                className="button is-light"
+                onClick={handleLogout}
+              >
+                Logout
+              </button>
+              : <>
+                <Link to='/login?login' className="button is-light">
+                  Login
+                </Link>
+                <Link to='/login' className="button is-primary">
+                  Register
+                </Link>
+              </>}
           </div>
         </div>
       </div>

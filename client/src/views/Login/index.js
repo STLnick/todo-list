@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useLocation, useHistory } from 'react-router-dom'
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import * as Yup from 'yup'
+
 import api from 'api'
 import { removeEmptyProps } from 'utils'
 
 import { Options } from './Options'
+import { UserContext } from '../../UserContext'
 
 const repo = api()
 
@@ -14,6 +16,7 @@ export const Login = () => {
   const location = useLocation()
   const [loginMode, setLoginMode] = useState(location.search.includes('?login'))
   const [forgotPwMode, setForgotPwMode] = useState(location.search.includes('?forgot'))
+  const { user, setUser } = useContext(UserContext)
 
   const handleClick = (e) => {
     if (e.target.textContent.includes('Forgot')) {
@@ -46,6 +49,7 @@ export const Login = () => {
         })}
         onSubmit={async (values, { setSubmitting }) => {
           const userInfoObj = removeEmptyProps(values)
+          console.log(userInfoObj)
 
           if (forgotPwMode) {
             // Resetting Password
@@ -53,9 +57,14 @@ export const Login = () => {
             // TODO: present some screen where they can enter a new pw
           } else if (loginMode) {
             // Logging In
-            setSubmitting(false)
-            const res = await repo.loginUser(userInfoObj)
-            history.push('/todo', { user: res })
+            try {
+              const res = await repo.loginUser(userInfoObj)
+              setUser(res)
+              setSubmitting(false)
+              history.push('/todo', { user: res })
+            } catch (err) {
+              console.log(err)
+            }
           } else {
             // Registering
             // TODO: Take user object and make POST req to /users/add
