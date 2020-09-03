@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react'
 import { useLocation, useHistory } from 'react-router-dom'
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import * as Yup from 'yup'
+import { motion } from 'framer-motion'
 
 import api from 'api'
 import auth from 'auth'
@@ -12,7 +13,24 @@ import { UserContext } from '../../UserContext'
 
 const repo = api()
 
-console.log(auth)
+const containerVariants = {
+  hidden: {
+    opacity: 0,
+    x: '100vw'
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      delay: 0.75,
+      duration: 1.25
+    }
+  },
+  exit: {
+    x: '-100vw',
+    transition: { ease: 'easeInOut' }
+  }
+}
 
 export const Login = () => {
   const history = useHistory()
@@ -37,7 +55,12 @@ export const Login = () => {
   buttonText = forgotPwMode ? 'Get Password' : buttonText
 
   return (
-    <div className="box has-text-centered mx-3">
+    <motion.div
+      className="box has-text-centered mx-3"
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+      variants={containerVariants}>
       <h2 className="is-size-3 mb-5">{titleText}</h2>
       <Formik
         initialValues={{
@@ -128,6 +151,6 @@ export const Login = () => {
           />
         </Form>}
       </Formik>
-    </div>
+    </motion.div>
   )
 }

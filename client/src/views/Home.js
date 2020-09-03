@@ -1,12 +1,37 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
+
+const containerVariants = {
+  hidden: {
+    opacity: 0,
+    x: '100vw'
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      delay: 0.75,
+      duration: 1.25
+    }
+  },
+  exit: {
+    x: '-100vw',
+    transition: { ease: 'easeInOut' }
+  }
+}
 
 export const Home = () => {
-  return <div>
+
+  return <motion.div
+    initial="hidden"
+    animate="visible"
+    exit="exit"
+    variants={containerVariants}>
     <section className="hero is-fullheight">
       <div className="hero-body">
         <div className="container">
-          <h1 className="title">
+          <h1 className="title is-size-2">
             Todo List App
           </h1>
           <Link
@@ -29,5 +54,5 @@ export const Home = () => {
         A productivity app that allows you to track the things you need to get done.
       </h3>
     </section>
-  </div>
+  </motion.div>
 }
