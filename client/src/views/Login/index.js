@@ -19,7 +19,7 @@ export const Login = () => {
   const location = useLocation()
   const [loginMode, setLoginMode] = useState(location.search.includes('?login'))
   const [forgotPwMode, setForgotPwMode] = useState(location.search.includes('?forgot'))
-  const { user, setUser } = useContext(UserContext)
+  const { userId, setUserId } = useContext(UserContext)
 
   const handleClick = (e) => {
     if (e.target.textContent.includes('Forgot')) {
@@ -61,8 +61,8 @@ export const Login = () => {
             auth.signInWithEmailAndPassword(userInfoObj.email, userInfoObj.password)
               .then((res) => {
                 setSubmitting(false)
-                setUser(auth.currentUser.uid)
-                history.push('/todo', { userId: auth.currentUser.uid })
+                setUserId(auth.currentUser.uid)
+                history.push('/todo')
               })
               .catch((err) => console.log(err))
           } else {

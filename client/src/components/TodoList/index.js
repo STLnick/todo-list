@@ -1,10 +1,11 @@
-import React, { useEffect, useReducer, useState } from 'react'
+import React, { useContext, useEffect, useReducer, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import api from 'api'
 
 import { Display } from './Display'
 import { Form } from './Form'
 import { List } from './List'
+import { UserContext } from '../../UserContext'
 
 const repo = api()
 
@@ -33,15 +34,14 @@ export const TodoList = () => {
   const location = useLocation()
   const [inputText, setInputText] = useState('')
   const [todos, dispatch] = useReducer(reducer, initialState);
-
-  const userId = location.state.userId;
+  const { userId } = useContext(UserContext)
 
   useEffect(() => {
     (async () => {
       const dbTodos = await repo.getUserTodos({ userId })
       dispatch({ type: 'RETRIEVE', dbTodos })
     })()
-  }, [location.state.userId])
+  }, [userId])
 
   const calcCompletedTodos = () => todos.filter(({ completed }) => completed).length
 

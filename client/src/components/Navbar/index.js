@@ -7,7 +7,7 @@ import logo from '../../todo.png'
 
 export const Navbar = () => {
   const history = useHistory()
-  const { user, setUser } = useContext(UserContext)
+  const { userId, setUserId } = useContext(UserContext)
 
   const handleBurgerClick = () => {
     document.querySelector('.navbar-burger').classList.toggle('is-active');
@@ -16,7 +16,7 @@ export const Navbar = () => {
 
   const handleLogout = () => {
     // Remove the user from context
-    setUser(null)
+    setUserId(null)
     // Sign out from firebase auth
     auth.signOut()
     history.push('/login?login')
@@ -59,7 +59,7 @@ export const Navbar = () => {
       <div className="navbar-end">
         <div className="navbar-item">
           <div className="buttons">
-            {user
+            {userId
               ? <button
                 className="button is-light"
                 onClick={handleLogout}
