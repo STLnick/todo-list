@@ -35,14 +35,25 @@ const containerVariants = {
 export const Login = () => {
   const history = useHistory()
   const location = useLocation()
+  const [loginError, setLoginError] = useState('')
   const [loginMode, setLoginMode] = useState(location.search.includes('?login'))
+  const [forgotPwError, setForgotPwError] = useState('')
   const [forgotPwMode, setForgotPwMode] = useState(location.search.includes('?forgot'))
+  const [registerError, setRegisterError] = useState('')
   const { userId, setUserId } = useContext(UserContext)
+
+  const resetErrors = () => {
+    setForgotPwError('')
+    setLoginError('')
+    setRegisterError('')
+  }
 
   const handleClick = (e) => {
     if (e.target.textContent.includes('Forgot')) {
+      resetErrors()
       setForgotPwMode(true)
     } else {
+      resetErrors()
       setForgotPwMode(false)
       setLoginMode(prevMode => !prevMode)
     }
@@ -79,6 +90,7 @@ export const Login = () => {
           if (forgotPwMode) {
             // Resetting Password
             auth.sendPasswordResetEmail(userInfoObj.email)
+              .catch((err) => setForgotPwError(() => err.message))
           } else if (loginMode) {
             // Logging In
             auth.signInWithEmailAndPassword(userInfoObj.email, userInfoObj.password)
@@ -87,7 +99,7 @@ export const Login = () => {
                 setUserId(auth.currentUser.uid)
                 history.push('/todo')
               })
-              .catch((err) => console.log(err))
+              .catch((err) => setLoginError(() => err.message))
           } else {
             // Registering
             auth.createUserWithEmailAndPassword(userInfoObj.email, userInfoObj.password)
@@ -96,7 +108,7 @@ export const Login = () => {
                 await repo.addUser({ uid: auth.currentUser.uid })
                 history.push('/todo', { user: auth.currentUser.uid })
               })
-              .catch((err) => console.log('Error: ', err))
+              .catch((err) => setRegisterError(() => err.message))
           }
 
         }}
@@ -120,6 +132,7 @@ export const Login = () => {
               <Field className="input is-primary mb-5" name="email" type="text" />
               <p className="help is-danger">
                 <ErrorMessage name="email" />
+
               </p>
             </div>
           </div>
@@ -143,6 +156,7 @@ export const Login = () => {
             type="submit">
             {buttonText}
           </button>
+          <p className="help has-text-danger">{forgotPwError || loginError || registerError}</p>
           <Options
             clickHandler={handleClick}
             forgotPwMode={forgotPwMode}
@@ -151,6 +165,6 @@ export const Login = () => {
           />
         </Form>}
       </Formik>
-    </motion.div>
+    </motion.div >
   )
 }
