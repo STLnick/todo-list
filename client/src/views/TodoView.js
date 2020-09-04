@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import { useHistory } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
 import { TodoList } from '../components'
@@ -24,17 +25,12 @@ const containerVariants = {
 }
 
 export const TodoView = () => {
+  const history = useHistory()
   const { userId } = useContext(UserContext)
 
-  return userId ? <TodoList /> : <motion.div className="todo-box box p-4"
-    className="todo-box box p-4"
-    initial="hidden"
-    animate="visible"
-    exit="exit"
-    variants={containerVariants}>
-    <h2
-      className="title py-3 has-text-centered is-family-monospace is-uppercase has-background-danger has-text-white">
-      Not Logged In
-    </h2>
-  </motion.div>
+  if (!userId) {
+    history.push('/login?login')
+  }
+
+  return <TodoList />
 }
