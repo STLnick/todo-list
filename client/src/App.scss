@@ -1,0 +1,47 @@
+@import "./shared";
+
+#wrapper {
+  align-items: center;
+  background: linear-gradient($light-blue, #eee 300px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.about {
+  padding: 4rem 1rem;
+}
+
+.cta-button {
+  margin: 1rem;
+}
+
+.footer-content {
+  background-color: #ddd;
+}
+
+.footer svg {
+  color: $primary;
+  font-size: 28px;
+  margin: 0.5rem;
+}
+
+.hero {
+  text-align: center;
+}
+
+.list {
+  min-height: 200px;
+}
+
+.todo-box {
+  margin-top: 2rem;
+  width: 70%;
+}
+
+@media screen and (max-width: 500px) {
+  .todo-box {
+    width: 90%;
+  }
+}
