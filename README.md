@@ -31,12 +31,6 @@ This app was built using the MERN stack:
 
 ### TODOs
 
-- Deploy it!
+- Deploy it (maybe one day)!
   - Will deploy client-side on Netlify
   - Will deploy server-side on Heroku
-
-### Future Features
-
-- Expand App scope
-  - First idea is to add an _Address Book_ feature
-    - A user could save a Name, Phone Number, Email etc. for contacts
